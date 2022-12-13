@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Of Contents with Jquery - Ramazan Umutlu</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var headings = $("article h2");
+            headings.each(function(i) {
+                var heading = $(this);
+                var h2Text = $(this).text();
+                h2Text = h2Text.toLowerCase();
+                h2Text = h2Text.replace(/ /g, "-");
+                h2Text = h2Text.replace("?", "");
+                var id = h2Text;
+                heading.attr("id", id);
+                $("#table-of-contents").append('<li><a href="#' + id + '">' + heading.text() + '</a></li>');
+            });
+            $("#table-of-contents a").on("click", function(e) {
+                e.preventDefault();
+                var id = $(this).attr("href");
+                var target = $(id);
+                $("html, body").animate({
+                    scrollTop: target.offset().top
+                }, 1000);
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Your article title :)</h1>
+    <strong>Table of Contents:</strong>
+    <ul id="table-of-contents">
+    </ul>
+    <article>
+        <h2>First Headline</h2>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Error, labore eos? Adipisci numquam suscipit voluptatibus quis quasi nemo debitis explicabo quia dolore voluptate amet dolor deleniti vitae laborum accusantium, eligendi nesciunt minus perferendis saepe odit libero sit assumenda rem! Modi.</p>
+        <h2>Second Headline</h2>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia reprehenderit, praesentium facilis, aspernatur rerum minus corrupti nihil sunt aliquam dolores tempora consectetur voluptatum soluta adipisci quaerat. Quaerat voluptate libero consequuntur?
+    </article>
+    <p>If you want to improve this script you can send PR. <a href="https://www.linkedin.com/in/ramazan-umutlu/">Ramazan Umutlu</a></p>
+</body>
+</html>
